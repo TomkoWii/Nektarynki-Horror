@@ -5,7 +5,7 @@ include $(DEVKITPPC)/wii_rules
 TARGET := Nektarynki
 BUILD := build
 SOURCES := src
-DATA :=
+DATA := assets
 INCLUDES := include
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
@@ -17,10 +17,17 @@ export DEPSDIR := $(CURDIR)/$(BUILD)
 CPPFILES := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 
 export LD := $(CXX)
-export OFILES := $(CPPF)
-export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(DEVKITPRO)/libogc/include
-export LIBPATHS := -L$(LIBOGC_LIB)
-export LIBS := -lwiiuse -lbte -logc -lm
+export OFILES := $(CPPFILES:.cpp=.o)
+
+export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
+	-I$(DEVKITPRO)/libogc/include \
+	-I$(PORTLIBS)/include
+
+export LIBDIRS := $(PORTLIBS)
+
+export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
+
+export LIBS := -lgrrlib -lpngu `$(PREFIX)pkg-config freetype2 libpng libjpeg --libs` -lfat -lwiiuse -lbte -logc -lm
 
 .PHONY: all clean
 
