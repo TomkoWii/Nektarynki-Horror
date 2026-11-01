@@ -1,3 +1,4 @@
+
 name: Wii Game Compilation
 
 on:
@@ -16,12 +17,25 @@ jobs:
       - name: Download project
         uses: actions/checkout@v4
 
+      - name: Check project files
+        run: |
+          echo "Project directory:"
+          pwd
+          echo "Project files:"
+          ls -la
+          echo "Source files:"
+          ls -la src
+          echo "Makefile:"
+          cat Makefile
+
       - name: Compile Wii game
         run: |
-          make
+          make -f Makefile
 
       - name: Upload Wii game
         uses: actions/upload-artifact@v4
         with:
           name: Nektarynki-Wii
-          path: "*.dol"
+          path: Nektarynki.dol
+          if-no-files-found: error
+          
