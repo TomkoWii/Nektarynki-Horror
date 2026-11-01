@@ -19,7 +19,7 @@ CPPFILES := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 export LD := $(CXX)
 export OFILES := $(CPPFILES:.cpp=.o)
 
-export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(LIBOGC_INC)
+export INCLUDE := -I$(CURDIR)/include -I$(DEVKITPRO)/libogc/include
 export LIBDIRS := $(PORTLIBS)
 export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
