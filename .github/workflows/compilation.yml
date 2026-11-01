@@ -1,0 +1,27 @@
+name: Wii Game Compilation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: devkitpro/devkitppc:latest
+
+    steps:
+      - name: Download project
+        uses: actions/checkout@v4
+
+      - name: Compile Wii game
+        run: |
+          make
+
+      - name: Upload Wii game
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nektarynki-Wii
+          path: "*.dol"
