@@ -19,8 +19,7 @@ CPPFILES := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 export LD := $(CXX)
 export OFILES := $(CPPFILES:.cpp=.o)
 
-export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir))
-
+export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(LIBOGC_INC)
 export LIBDIRS := $(PORTLIBS)
 export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
