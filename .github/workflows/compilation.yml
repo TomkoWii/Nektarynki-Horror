@@ -17,16 +17,10 @@ jobs:
       - name: Download project
         uses: actions/checkout@v4
 
-      - name: Check project files
+      - name: Install Wii development libraries
         run: |
-          echo "Project directory:"
-          pwd
-          echo "Project files:"
-          ls -la
-          echo "Source files:"
-          ls -la src
-          echo "Makefile:"
-          cat Makefile
+          dkp-pacman -Syyu --noconfirm
+          dkp-pacman -S --needed --noconfirm wii-dev
 
       - name: Compile Wii game
         run: |
