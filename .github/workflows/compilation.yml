@@ -1,4 +1,3 @@
-
 name: Wii Game Compilation
 
 on:
@@ -17,14 +16,13 @@ jobs:
       - name: Download project
         uses: actions/checkout@v4
 
-      - name: Install Wii development libraries
+      - name: Check Wii libraries
         run: |
-          dkp-pacman -Syyu --noconfirm
-          dkp-pacman -S --needed --noconfirm wii-dev
+          echo "Checking libogc..."
+          ls /opt/devkitpro/libogc/include/ogc/system.h
 
       - name: Compile Wii game
-        run: |
-          make -f Makefile
+        run: make -f Makefile
 
       - name: Upload Wii game
         uses: actions/upload-artifact@v4
@@ -32,4 +30,3 @@ jobs:
           name: Nektarynki-Wii
           path: Nektarynki.dol
           if-no-files-found: error
-          
