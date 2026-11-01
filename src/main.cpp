@@ -1,4 +1,4 @@
-#include "../gccore.h"
+#include <gccore.h>
 #include <wiiuse/wpad.h>
 #include <ogc/system.h>
 #include <stdio.h>
