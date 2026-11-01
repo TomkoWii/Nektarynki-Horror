@@ -17,8 +17,8 @@ export DEPSDIR := $(CURDIR)/$(BUILD)
 CPPFILES := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 
 export LD := $(CXX)
-export OFILES := $(CPPFILES:.cpp=.o)
-export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(LIBOGC_INC)
+export OFILES := $(CPPF
+export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(DEVKITPRO)/libogc/include
 export LIBPATHS := -L$(LIBOGC_LIB)
 export LIBS := -lwiiuse -lbte -logc -lm
 
